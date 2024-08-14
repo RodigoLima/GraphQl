@@ -2,16 +2,18 @@ import { ApolloServer, gql } from "apollo-server";
 
 const typeDefs = gql`
   #Pontos de Entrada da API
-
+  scalar Date
   type Query {
     hello: String!
+    horaCerta: Date
   }
 `;
 
 const resolvers = {
-    Query: {
-      hello: () => "Hello, World!",
-    },
+  Query: {
+    hello: () => "Hello, World!",
+    horaCerta: () => new Date(),
+  },
 };
 
 const server = new ApolloServer({
