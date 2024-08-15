@@ -1,14 +1,11 @@
-import { mergeTypeDefs } from '@graphql-tools/merge';
-import { loadFilesSync } from '@graphql-tools/load-files';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { mergeTypeDefs } from "@graphql-tools/merge";
+import { loadFilesSync } from "@graphql-tools/load-files";
+import { fileURLToPath, URL } from "url";
+import path from "path";
 
-// Obtenha o equivalente ao `__dirname` no ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Carregue todos os arquivos .graphql no diretório atual
-const typesArray = loadFilesSync(path.join(__dirname, './**/*.graphql'));
+const typesArray = loadFilesSync(
+  path.join(fileURLToPath(new URL("./", import.meta.url)), "./**/*.graphql")
+);
 
 // Combine todos os tipos carregados
 const typeDefs = mergeTypeDefs(typesArray);
