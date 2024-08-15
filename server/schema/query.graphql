@@ -1,0 +1,9 @@
+type Query {
+  hello: String!
+  usuarios: [Usuario]
+  produtoEmDestaque: Produto
+  numerosDaMega: [Int]
+  perfis: [Perfil]
+  perfil(id: ID): Perfil
+  usuario(id: ID): Usuario
+}
