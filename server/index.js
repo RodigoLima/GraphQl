@@ -22,7 +22,8 @@ const typeDefs = gql`
     email: String!
     idade: String!
     salario: Float
-    vip: Boolean
+    vip: Boolean,
+    perfil: Perfil
   }
 
   type Query {
@@ -39,11 +40,11 @@ const typeDefs = gql`
 
 const perfis = [
   {
-    id: "1",
+    id: 1,
     nome: "Administrador",
   },
   {
-    id: "2",
+    id: 2,
     nome: "Comun",
   }
 ]
@@ -51,27 +52,31 @@ const perfis = [
 const usuarios = [
   {
     id: "1",
-    nome: "Teste",
+    nome: "Aricia",
     email: "teste@example.com",
     idade: "30",
     salario_real: 5000,
     vip: true,
+    perfil_id: 1
   },
   {
     id: "2",
-    nome: "Administrador",
+    nome: "Rodrigo",
     email: "admin@example.com",
     idade: "50",
     salario_real: 10000,
     vip: true,
+    perfil_id: 2
   },
   {
     id: "3",
-    nome: "Cliente",
+    nome: "Ingrid",
     email: "cliente@example.com",
     idade: "25",
     salario_real: 3000,
     vip: false,
+
+    perfil_id: 1
   }
 ];
 
@@ -90,6 +95,11 @@ const resolvers = {
     salario(usuario) {
       return usuario.salario_real;
     },
+    perfil(usuario)
+    {
+      const perfil = perfis.find((p) => p.id === usuario.perfil_id);
+      return perfil;
+    }
   },
   Query: {
     hello: () => "Hello, World!",
